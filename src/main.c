@@ -29,7 +29,7 @@ static int sma_filtered(int raw)
     sum = sum-buf[idx];
     buf[idx] = raw;
     sum = sum + buf[idx];
-    idx = (idx+1)%SMA_WINDOW;
+    idx = (idx+1)%SMA_WINDOW;  //кльова штука
 
     return sum / count; //якщо початок роботи не важливий то можна без counter - retunr sum/SMA_WINDOW
 
