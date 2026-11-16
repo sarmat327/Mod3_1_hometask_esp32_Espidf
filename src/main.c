@@ -31,7 +31,7 @@ static int sma_filtered(int raw)
     sum = sum + buf[idx];
     idx = (idx+1)%SMA_WINDOW;
 
-    return sum / count;
+    return sum / count; //якщо початок роботи не важливий то можна без counter - retunr sum/SMA_WINDOW
 
 }
 
@@ -51,7 +51,7 @@ void app_main(void)
 
     ESP_ERROR_CHECK(adc_oneshot_io_to_channel(LDR_GPIO, &unit, &channel));
 
-    printf("unit = %d, channel = %d\n", unit, channel);
+    printf("unit = %d, channel = %d\n", unit, channel); // ПИТАННЯ - як це працює, коли канал визначається автоматично?
 
     // 3. Налаштовуємо канал 
 
@@ -59,10 +59,6 @@ void app_main(void)
     chan_cfg.atten = ADC_ATTEN_DB_12;
     chan_cfg.bitwidth = ADC_BITWIDTH_DEFAULT;
     
-    //adc_oneshot_chan_cfg_t chan_cfg = {
-    //    .atten = ADC_ATTEN_DB_12,
-    //    .bitwidth = ADC_BITWIDTH_DEFAULT,
-    //};
 
     ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1, channel, &chan_cfg));
 
